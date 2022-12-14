@@ -1,19 +1,15 @@
-// import { google } from "googleapis";
-// import * as path from "path";
-// import * as fs from "fs";
-
 const { google } = require("googleapis");
 const path = require("path");
 const fs = require("fs");
+const dotenv = require("dotenv");
 
-const CLIENT_ID =
-  "97213920835-rj7ftcd9k3g0u3ro8m7jd8fqsq2p2a0b.apps.googleusercontent.com";
-const CLIENT_SECRET = "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";
+dotenv.config();
 
-const REDIRECT_URL = "https://developers.google.com/oauthplayground";
-
-const REFRESH_TOKEN =
-  "1//0408P_pSVuuQ6CgYIARAAGAQSNwF-L9IrrA-KG011TI1Da0VZxd4XvXgZjjdhSMDinUGUo9yOOKN2Qd5wfoL6VBuUO_E_bZmxTew";
+// env variables
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const REDIRECT_URL = process.env.REDIRECT_URL;
+const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
 
 const oauth2Client = new google.auth.OAuth2(
   CLIENT_ID,
@@ -31,7 +27,7 @@ async function uploadFile() {
   try {
     const response = await drive.files.create({
       requestBody: {
-        name: "bg-boy.jpg",
+        name: "ngimdock.jpg",
         mimeType: "image/jpg",
       },
       media: {
