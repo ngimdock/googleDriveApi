@@ -41,6 +41,7 @@ async function uploadFile() {
     console.log(error.message);
   }
 }
+
 async function deleteFile(fileId) {
   try {
     const response = await drive.files.delete({
@@ -53,6 +54,31 @@ async function deleteFile(fileId) {
   }
 }
 
+async function getPublicUrl(fileId) {
+  try {
+    await drive.permissions.create({
+      fileId,
+      requestBody: {
+        role: "reader",
+        type: "anyone",
+      },
+    });
+
+    const result = await drive.files.get({
+      fileId,
+      fields: "webViewLink, webContentLink",
+    });
+
+    console.log(result.data);
+
+    return result.data;
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
 // uploadFile();
 
-deleteFile("1QUrY-VYllQM6SvUfTB0OLhCKNb3AvkSZ");
+getPublicUrl("1_SMxQ_UaioWzvU-pfHNjjPovk0xgxaWC");
+
+// deleteFile("1QUrY-VYllQM6SvUfTB0OLhCKNb3AvkSZ");
