@@ -41,5 +41,18 @@ async function uploadFile() {
     console.log(error.message);
   }
 }
+async function deleteFile(fileId) {
+  try {
+    const response = await drive.files.delete({
+      fileId,
+    });
 
-uploadFile();
+    console.log(response.data, response.status);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+// uploadFile();
+
+deleteFile("1QUrY-VYllQM6SvUfTB0OLhCKNb3AvkSZ");
